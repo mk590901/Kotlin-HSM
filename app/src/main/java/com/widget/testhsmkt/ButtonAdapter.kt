@@ -12,7 +12,7 @@ import com.widget.testhsmkt.implementation.Samek_9BContextObject
 import com.widget.testhsmkt.support.ObjectEvent
 import java.util.Locale
 
-class ButtonAdapter(private val buttonTexts: List<String>/*, private val contextObject: Samek_9BContextObject*/) :
+class ButtonAdapter(private val buttonTexts: List<String>, private val contextObject: Samek_9BContextObject) :
     RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>() {
     val TAG: String = "hsm"
 
@@ -25,12 +25,12 @@ class ButtonAdapter(private val buttonTexts: List<String>/*, private val context
         val text = buttonTexts[position].lowercase(Locale.ROOT)
         holder.button.text = text
         holder.button.setOnClickListener(View.OnClickListener {
-            //val event = text
-            //val eventId: Int = contextObject.getEventId(event)
-            //Log.d(TAG, "->[$event = $eventId]")
-            //contextObject.done(ObjectEvent(eventId, event))
+            val event = text
+            val eventId: Int = contextObject.getEventId(event)
+            Log.d(TAG, "->[$event = $eventId]")
+            contextObject.done(ObjectEvent(eventId, event))
 
-            Log.d(TAG, "->[$text]")
+            //Log.d(TAG, "->[$text]")
         })
     }
 

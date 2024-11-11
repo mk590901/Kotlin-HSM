@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         horizontalRecyclerView = findViewById(R.id.horizontalRecyclerView)
         horizontalRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        buttonAdapter = ButtonAdapter(buttonTexts)
+        buttonAdapter = ButtonAdapter(buttonTexts, contextObject!!)
         horizontalRecyclerView.adapter = buttonAdapter
     }
 
