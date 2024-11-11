@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initStateMachine() {
-        Log.d(TAG, "initStateMachine")
+        Log.d(TAG, "******* initStateMachine *******")
         contextObject = Samek_9BContextObject(contextLogger)
         val mediator: Samek_9BMediator = Samek_9BMediator(contextObject!!, interceptor, contextLogger)
         val hsmStateMachine: Samek_9BQHsmScheme = Samek_9BQHsmScheme(mediator, logger)
