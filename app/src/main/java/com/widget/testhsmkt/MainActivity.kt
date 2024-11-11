@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+        createStateMachine()
         setupLayout()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -46,16 +47,22 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        initStateMachine()
+
+        initStateMachine();
+
     }
 
-    private fun initStateMachine() {
+    private fun createStateMachine() {
         Log.d(TAG, "******* initStateMachine *******")
         contextObject = Samek_9BContextObject(contextLogger)
         val mediator: Samek_9BMediator = Samek_9BMediator(contextObject!!, interceptor, contextLogger)
         val hsmStateMachine: Samek_9BQHsmScheme = Samek_9BQHsmScheme(mediator, logger)
         Samek_9BWrapper(hsmStateMachine, mediator)
 
+    }
+
+    private fun initStateMachine() {
+        contextObject!!.init()
     }
 
     private fun setupLayout() {
