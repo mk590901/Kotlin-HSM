@@ -7,6 +7,7 @@ import com.widget.testhsmkt.interfaces.IHsm
 import com.widget.testhsmkt.interfaces.ILogger
 import com.widget.testhsmkt.interfaces.IMediator
 import com.widget.testhsmkt.support.Commands
+import com.widget.testhsmkt.support.Executor
 import com.widget.testhsmkt.support.Interceptor
 import com.widget.testhsmkt.support.SignalPairs
 
@@ -108,7 +109,7 @@ class Samek_9BMediator(
     }
 
     override fun execute(state: String?, signal: Int, ticket: Int) {
-        val command = commands_!![state, signal]
+        val command = commands_!!.get(state!!, signal)
         if (command == null) {
             val data = interceptor_.getTicket(ticket)
             if (data == null) {
@@ -131,137 +132,223 @@ class Samek_9BMediator(
     fun createCommands() {
         try {
             commands_ = Commands()
-            commands_!!.add("init", Samek_9BQHsmScheme.INIT) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnInit(value)
-                true
-            }
 
-            commands_!!.add("s2", QHsm.Q_ENTRY_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS2Entry(value)
-                true
-            }
-            commands_!!.add("s2", QHsm.Q_EXIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS2Exit(value)
-                true
-            }
-            commands_!!.add("s2", QHsm.Q_INIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS2Exit(value)
-                true
-            }
-            commands_!!.add("s2", Samek_9BQHsmScheme.c) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS2c(value)
-                true
-            }
-            commands_!!.add("s2", Samek_9BQHsmScheme.f) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS2f(value)
-                true
-            }
+//            val executor = object : Executor {
+//                override fun execute(signal: Int, ticket: Int): Boolean {
+//                    val value = interceptor_.getTicket(ticket)
+//                    context_.OnInit(value)
+//                    return true
+//                }
+//            }
 
-            commands_!!.add("s21", QHsm.Q_ENTRY_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS21Entry(value)
-                true
-            }
-            commands_!!.add("s21", QHsm.Q_EXIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS21Exit(value)
-                true
-            }
-            commands_!!.add("s21", QHsm.Q_INIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS21Exit(value)
-                true
-            }
-            commands_!!.add("s21", Samek_9BQHsmScheme.b) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS21b(value)
-                true
-            }
-            commands_!!.add("s21", Samek_9BQHsmScheme.h) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS21h(value)
-                true
-            }
+            //Ok commands_!!.add("init", Samek_9BQHsmScheme.INIT, executor)
+            //Ok commands_?.add("init", Samek_9BQHsmScheme.INIT, executor)
 
-            commands_!!.add("s211", QHsm.Q_ENTRY_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS211Entry(value)
-                true
-            }
-            commands_!!.add("s211", QHsm.Q_EXIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS211Exit(value)
-                true
-            }
-            commands_!!.add("s211", Samek_9BQHsmScheme.g) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS211g(value)
-                true
-            }
+            commands_?.add("init", Samek_9BQHsmScheme.INIT, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnInit(value)
+                    return true
+                }
+            })
 
-            commands_!!.add("s1", QHsm.Q_ENTRY_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1Entry(value)
-                true
-            }
-            commands_!!.add("s1", QHsm.Q_EXIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1Exit(value)
-                true
-            }
-            commands_!!.add("s1", QHsm.Q_INIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1Exit(value)
-                true
-            }
-            commands_!!.add("s1", Samek_9BQHsmScheme.b) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1b(value)
-                true
-            }
-            commands_!!.add("s1", Samek_9BQHsmScheme.c) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1c(value)
-                true
-            }
-            commands_!!.add("s1", Samek_9BQHsmScheme.f) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1f(value)
-                true
-            }
-            commands_!!.add("s1", Samek_9BQHsmScheme.a) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1a(value)
-                true
-            }
-            commands_!!.add("s1", Samek_9BQHsmScheme.d) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS1d(value)
-                true
-            }
 
-            commands_!!.add("s11", QHsm.Q_ENTRY_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS11Entry(value)
-                true
-            }
-            commands_!!.add("s11", QHsm.Q_EXIT_SIG) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS11Exit(value)
-                true
-            }
-            commands_!!.add("s11", Samek_9BQHsmScheme.g) { signal: Int, ticket: Int ->
-                val value = interceptor_.getTicket(ticket)
-                context_.OnS11g(value)
-                true
-            }
-        } catch (exception: Exception) {
+            commands_?.add("s2", QHsm.Q_ENTRY_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS2Entry(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s2", QHsm.Q_EXIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS2Exit(value)
+                    return true
+                }
+            })
+
+
+
+            commands_!!.add("s2", QHsm.Q_INIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS2Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s2", Samek_9BQHsmScheme.c, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS2c(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s2", Samek_9BQHsmScheme.f, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS2f(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s21", QHsm.Q_ENTRY_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS21Entry(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s21", QHsm.Q_EXIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS21Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s21", QHsm.Q_INIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS21Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s21", Samek_9BQHsmScheme.b, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS21b(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s21", Samek_9BQHsmScheme.h, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS21h(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s211", QHsm.Q_ENTRY_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS211Entry(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s211", QHsm.Q_EXIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS211Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s211", Samek_9BQHsmScheme.g, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS211g(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", QHsm.Q_ENTRY_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1Entry(value)
+                    return true
+                }
+            })
+
+
+            commands_!!.add("s1", QHsm.Q_EXIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", QHsm.Q_INIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", Samek_9BQHsmScheme.b, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1b(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", Samek_9BQHsmScheme.c, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1c(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", Samek_9BQHsmScheme.f, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1f(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", Samek_9BQHsmScheme.a, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1a(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s1", Samek_9BQHsmScheme.d, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS1d(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s11", QHsm.Q_ENTRY_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS11Entry(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s11", QHsm.Q_EXIT_SIG, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS11Exit(value)
+                    return true
+                }
+            })
+
+            commands_!!.add("s11", Samek_9BQHsmScheme.g, object : Executor {
+                override fun execute(signal: Int, ticket: Int): Boolean {
+                    val value = interceptor_.getTicket(ticket)
+                    context_.OnS11g(value)
+                    return true
+                }
+            })
+        }
+        catch (exception: Exception) {
         }
     }
 }
