@@ -10,12 +10,11 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.widget.testhsmkt.implementation.Samek_9BContextObject
 import com.widget.testhsmkt.support.ObjectEvent
+import java.util.Locale
 
-class ButtonAdapter(private val buttonTexts: List<String>, private val contextObject: Samek_9BContextObject) :
+class ButtonAdapter(private val buttonTexts: List<String>/*, private val contextObject: Samek_9BContextObject*/) :
     RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder>() {
     val TAG: String = "hsm"
-
-    //private val contextObject: Samek_9BContextObject = contextObject
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ButtonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_button, parent, false)
@@ -23,13 +22,15 @@ class ButtonAdapter(private val buttonTexts: List<String>, private val contextOb
     }
 
     override fun onBindViewHolder(holder: ButtonViewHolder, position: Int) {
-        val text = buttonTexts[position].toLowerCase()
+        val text = buttonTexts[position].lowercase(Locale.ROOT)
         holder.button.text = text
         holder.button.setOnClickListener(View.OnClickListener {
-            val event = text
-            val eventId: Int = contextObject.getEventId(event)
-            Log.d(TAG, "->[$event = $eventId]")
-            contextObject.done(ObjectEvent(eventId, event))
+            //val event = text
+            //val eventId: Int = contextObject.getEventId(event)
+            //Log.d(TAG, "->[$event = $eventId]")
+            //contextObject.done(ObjectEvent(eventId, event))
+
+            Log.d(TAG, "->[$text]")
         })
     }
 

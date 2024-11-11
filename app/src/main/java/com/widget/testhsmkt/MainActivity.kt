@@ -1,20 +1,83 @@
 package com.widget.testhsmkt
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.widget.testhsmkt.implementation.Samek_9BContextObject
+import com.widget.testhsmkt.implementation.Samek_9BMediator
+import com.widget.testhsmkt.implementation.Samek_9BQHsmScheme
+import com.widget.testhsmkt.implementation.Samek_9BWrapper
+import com.widget.testhsmkt.support.GuiLogger
+import com.widget.testhsmkt.support.Interceptor
+import com.widget.testhsmkt.support.Logger
 
 class MainActivity : AppCompatActivity() {
+
+    val TAG: String = "hsm"
+
+    private var contextObject: Samek_9BContextObject? = null
+    private val logger: Logger = Logger()
+    private val contextLogger: GuiLogger = GuiLogger(this)
+    private val interceptor: Interceptor = Interceptor()
+
+    private lateinit var stringAdapter: StringAdapter
+    private lateinit var buttonAdapter: ButtonAdapter
+    private lateinit var verticalRecyclerView: RecyclerView
+    private lateinit var horizontalRecyclerView: RecyclerView
+
+    private val stringList : MutableList<String> = mutableListOf("");
+    private val buttonTexts = listOf("A", "B", "C", "D", "E", "F", "G", "H")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        setupLayout()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        initStateMachine()
+    }
+
+    private fun initStateMachine() {
+        Log.d(TAG, "initStateMachine")
+        contextObject = Samek_9BContextObject(contextLogger)
+        val mediator: Samek_9BMediator = Samek_9BMediator(contextObject!!, interceptor, contextLogger)
+        val hsmStateMachine: Samek_9BQHsmScheme = Samek_9BQHsmScheme(mediator, logger)
+        Samek_9BWrapper(hsmStateMachine, mediator)
+
+    }
+
+    private fun setupLayout() {
+        verticalRecyclerView = findViewById(R.id.verticalRecyclerView)
+        verticalRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // Add dividers to the verticalRecyclerView
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        verticalRecyclerView.addItemDecoration(dividerItemDecoration)
+
+        stringAdapter = StringAdapter(stringList)
+        verticalRecyclerView.adapter = stringAdapter
+
+        horizontalRecyclerView = findViewById(R.id.horizontalRecyclerView)
+        horizontalRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        buttonAdapter = ButtonAdapter(buttonTexts)
+        horizontalRecyclerView.adapter = buttonAdapter
+    }
+
+    fun addStringToRecyclerView(newString: String?) {
+        stringAdapter.addString(newString!!)
+        verticalRecyclerView.scrollToPosition(stringAdapter.itemCount - 1)
     }
 }

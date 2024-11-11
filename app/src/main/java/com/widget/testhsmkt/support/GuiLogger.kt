@@ -42,6 +42,6 @@ class GuiLogger(activity: MainActivity) : ILogger {
     override fun printTrace() {
         val text = string()
         Log.d(TAG, text)
-        //activity.addStringToRecyclerView(text)
+        activity.addStringToRecyclerView(text)
     }
 }
