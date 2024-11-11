@@ -1,45 +1,33 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-import com.widget.testhsm.hsm.QHsm;
+import com.widget.testhsmkt.hsm.QHsm
+import java.util.Hashtable
 
-import java.util.Hashtable;
+class SignalPairs {
+    private val container_ = Hashtable<Int, Int>()
 
-public class SignalPairs
-{
-	private Hashtable<Integer,Integer>
-		container_ 	= new Hashtable<Integer,Integer>()
-	;
-	public	int Number()
-	{
-		return	container_.size();
-	}
+//    fun Number(): Int {
+//        return container_.size()
+//    }
 
-	public	boolean	Add	(int objectAction, int hsmSignal)
-	{
-		boolean	result = false
-		;
-		if (container_.containsKey(objectAction))
-			return	result
-		;
-		try
-		{
-			container_.put(objectAction, hsmSignal);
-			result = true;
-		}
-		catch(Exception exception)
-		{
-		}
-		return	result;
-	}
-	
-	public	int	Get(int objectAction)
-	{
-		int result = QHsm.Q_EMPTY_SIG;
-		if (!container_.containsKey(objectAction))
-			return	result
-		;
-		result	= container_.get(objectAction)
-		;
-		return	result;
-	}
+    fun Add(objectAction: Int, hsmSignal: Int): Boolean {
+        var result = false
+
+        if (container_.containsKey(objectAction)) return result
+
+        try {
+            container_[objectAction] = hsmSignal
+            result = true
+        } catch (exception: Exception) {
+        }
+        return result
+    }
+
+    fun Get(objectAction: Int): Int {
+        var result: Int = QHsm.Q_EMPTY_SIG
+        if (!container_.containsKey(objectAction)) return result
+
+        result = container_[objectAction]!!
+        return result
+    }
 }

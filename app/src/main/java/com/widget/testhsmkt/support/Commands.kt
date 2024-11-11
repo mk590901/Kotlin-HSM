@@ -1,40 +1,36 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-import java.util.Hashtable;
+import java.util.Hashtable
 
-public class Commands {
-	private final Hashtable<String,Command>
-		container_ 	= new Hashtable<>();
-	public	int number()
-	{
-		return	container_.size();
-	}
-	
-	public	boolean add(String state, int signal, Executor executor) {
-		boolean	result = false;
-		String	key = getKey(state,signal);
-		if (container_.containsKey(key))
-			return	result;
-		try {
-			container_.put(key, new Command(state, signal, executor));
-			result = true;
-		}
-		catch(Exception exception) {
-		}
-		return	result;
-	}
+class Commands {
+    private val container_ = Hashtable<String, Command>()
 
-	public	Command get(String state, int signal) {
-		Command	result = null;
-		String	key = getKey(state,signal);
-		if (!container_.containsKey(key))
-			return	result;
-		result	= container_.get(key);
-		return	result;
-	}
-	
-	public String getKey(String state, int signal) {
-		String	result = state + "$" + Integer.toString(signal);
-		return	result;
-	}
+//    fun number(): Int {
+//        return container_.size()
+//    }
+
+    fun add(state: String, signal: Int, executor: Executor): Boolean {
+        var result = false
+        val key = getKey(state, signal)
+        if (container_.containsKey(key)) return result
+        try {
+            container_[key] = Command(state, signal, executor)
+            result = true
+        } catch (exception: Exception) {
+        }
+        return result
+    }
+
+    fun get(state: String, signal: Int): Command? {
+        var result: Command? = null
+        val key = getKey(state, signal)
+        if (!container_.containsKey(key)) return result
+        result = container_[key]
+        return result
+    }
+
+    fun getKey(state: String, signal: Int): String {
+        val result = "$state$$signal"
+        return result
+    }
 }

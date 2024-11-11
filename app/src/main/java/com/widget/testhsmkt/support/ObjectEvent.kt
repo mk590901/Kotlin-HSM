@@ -1,23 +1,20 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-public class ObjectEvent
-{
-	private int		event_	= 0x00;
-	private Object	data_	= null;
-	
-	public ObjectEvent(int event, Object data)
-	{
-		event_	= event;
-		data_	= data;
-	}
+class ObjectEvent
+    (event: Int, data: Any?) {
+    private var event_ = 0x00
+    private var data_: Any? = null
 
-	public	int Event()
-	{
-		return	event_;
-	}
+    init {
+        event_ = event
+        data_ = data
+    }
 
-	public	Object Data()
-	{
-		return	data_;
-	}
+    fun Event(): Int {
+        return event_
+    }
+
+    fun Data(): Any? {
+        return data_
+    }
 }

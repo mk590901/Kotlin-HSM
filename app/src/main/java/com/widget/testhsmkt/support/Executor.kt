@@ -1,5 +1,5 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-public interface Executor {
-	boolean execute(int signal, int ticket);
+interface Executor {
+    fun execute(signal: Int, ticket: Int): Boolean
 }

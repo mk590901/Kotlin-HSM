@@ -1,61 +1,47 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-import android.util.Log;
+import android.util.Log
+import com.widget.testhsmkt.MainActivity
+import com.widget.testhsmkt.interfaces.ILogger
 
-import com.widget.testhsm.MainActivity;
-import com.widget.testhsm.interfaces.ILogger;
+class GuiLogger(activity: MainActivity) : ILogger {
+    val TAG: String = "hsm"
+    val _logger: MutableList<String> = ArrayList()
+    val activity: MainActivity = activity
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class GuiLogger implements ILogger {
-
-    final String TAG = "hsm";
-    final List<String> _logger = new ArrayList<>();
-    final MainActivity activity;
-
-    public GuiLogger(MainActivity activity) {
-        this.activity = activity;
+    override fun trace(string: String?) {
+        _logger.add(string!!)
     }
 
-    @Override
-    public void trace(final String string) {
-        _logger.add(string);
-    }
-
-    @Override
-    public String string() {
-        String result = "";
-        for (int i = 0; i < _logger.size(); i++) {
-            result += _logger.get(i) + ((i == (_logger.size() - 1) || (i == 0)) ? "" : ";");
+    override fun string(): String {
+        var result = ""
+        for (i in _logger.indices) {
+            result += _logger[i] + (if ((i == (_logger.size - 1) || (i == 0))) "" else ";")
         }
-        return result;
+        return result
     }
 
-    @Override
-    public String toTrace() {
-        String result = "";
-        if (_logger.size() < 2) {
-            return result;
+    override fun toTrace(): String {
+        var result = ""
+        if (_logger.size < 2) {
+            return result
         }
-        for (int i = 1; i < _logger.size(); i++) {
-            result += _logger.get(i) + (i == (_logger.size() - 1) ? "" : " ");
+        for (i in 1 until _logger.size) {
+            result += _logger[i] + (if (i == (_logger.size - 1)) "" else " ")
         }
-        return result;
+        return result
     }
 
-    @Override
-    public void clear(final String label) {
-        _logger.clear();
-        if (!label.isEmpty()) {
-            _logger.add(label);
+    override fun clear(label: String?) {
+        _logger.clear()
+        if (!label!!.isEmpty()) {
+            _logger.add(label!!)
         }
     }
 
-    @Override
-    public void printTrace() {
-        String text = string();
-        Log.d(TAG, text);
-        activity.addStringToRecyclerView(text);
+    override fun printTrace() {
+        val text = string()
+        Log.d(TAG, text)
+        activity.addStringToRecyclerView(text)
     }
 }

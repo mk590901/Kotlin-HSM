@@ -1,49 +1,47 @@
-package com.widget.testhsmkt.support;
+package com.widget.testhsmkt.support
 
-import java.util.Hashtable;
+import java.util.Hashtable
 
-public class Interceptor {
-    public static final int INVALID_TICKET = -1;
-    public static final int MAX_VALUE = Integer.MAX_VALUE;
-    private int counter_ = 0;
-    private Hashtable<Integer, Object> container_ = new Hashtable<Integer, Object>();
+class Interceptor {
+    private var counter_ = 0
+    private val container_ = Hashtable<Int, Any>()
 
-    public int putTicket(Object object) {
-        int result = INVALID_TICKET;
-        if (object == null)
-            return result;
-        result = generate();
-        if (result == INVALID_TICKET)
-            return result;
+    fun putTicket(`object`: Any?): Int {
+        var result = INVALID_TICKET
+        if (`object` == null) return result
+        result = generate()
+        if (result == INVALID_TICKET) return result
         if (container_.containsKey(result)) {
-            result = INVALID_TICKET;
-            return result;
+            result = INVALID_TICKET
+            return result
         }
         try {
-            container_.put(result, object);
+            container_[result] = `object`
+        } catch (exception: Exception) {
         }
-		catch (Exception exception) {
-        }
 
-        return result;
+        return result
     }
 
-    public Object getTicket(int ticket) {
-        Object result = null;
-        if (!container_.containsKey(ticket))
-            return result;
-        result = container_.get(ticket);
-        container_.remove(ticket);
-        return result;
+    fun getTicket(ticket: Int): Any? {
+        var result: Any? = null
+        if (!container_.containsKey(ticket)) return result
+        result = container_[ticket]
+        container_.remove(ticket)
+        return result
     }
 
-    private int generate() {
-        if (counter_ == MAX_VALUE)
-            counter_ = 0;
-        return counter_++;
+    private fun generate(): Int {
+        if (counter_ == MAX_VALUE) counter_ = 0
+        return counter_++
     }
 
-    public int size() {
-        return container_.size();
+//    fun size(): Int {
+//        return container_.size()
+//    }
+
+    companion object {
+        const val INVALID_TICKET: Int = -1
+        const val MAX_VALUE: Int = Int.MAX_VALUE
     }
 }
