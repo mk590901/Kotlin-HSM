@@ -27,7 +27,6 @@ class Samek_9BMediator(
         createConnector()
     }
 
-
     private fun createConnector() {
         connector_ = SignalPairs()
         connector_!!.add(Samek_9BContextObject.INIT, Samek_9BQHsmScheme.INIT)
