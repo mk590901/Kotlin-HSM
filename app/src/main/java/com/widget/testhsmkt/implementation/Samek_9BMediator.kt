@@ -30,16 +30,16 @@ class Samek_9BMediator(
 
     private fun createConnector() {
         connector_ = SignalPairs()
-        connector_!!.Add(Samek_9BContextObject.INIT, Samek_9BQHsmScheme.INIT)
-        connector_!!.Add(Samek_9BContextObject.FINAL, Samek_9BQHsmScheme.FINAL)
-        connector_!!.Add(Samek_9BContextObject.b, Samek_9BQHsmScheme.b)
-        connector_!!.Add(Samek_9BContextObject.a, Samek_9BQHsmScheme.a)
-        connector_!!.Add(Samek_9BContextObject.d, Samek_9BQHsmScheme.d)
-        connector_!!.Add(Samek_9BContextObject.h, Samek_9BQHsmScheme.h)
-        connector_!!.Add(Samek_9BContextObject.g, Samek_9BQHsmScheme.g)
-        connector_!!.Add(Samek_9BContextObject.e, Samek_9BQHsmScheme.e)
-        connector_!!.Add(Samek_9BContextObject.c, Samek_9BQHsmScheme.c)
-        connector_!!.Add(Samek_9BContextObject.f, Samek_9BQHsmScheme.f)
+        connector_!!.add(Samek_9BContextObject.INIT, Samek_9BQHsmScheme.INIT)
+        connector_!!.add(Samek_9BContextObject.FINAL, Samek_9BQHsmScheme.FINAL)
+        connector_!!.add(Samek_9BContextObject.b, Samek_9BQHsmScheme.b)
+        connector_!!.add(Samek_9BContextObject.a, Samek_9BQHsmScheme.a)
+        connector_!!.add(Samek_9BContextObject.d, Samek_9BQHsmScheme.d)
+        connector_!!.add(Samek_9BContextObject.h, Samek_9BQHsmScheme.h)
+        connector_!!.add(Samek_9BContextObject.g, Samek_9BQHsmScheme.g)
+        connector_!!.add(Samek_9BContextObject.e, Samek_9BQHsmScheme.e)
+        connector_!!.add(Samek_9BContextObject.c, Samek_9BQHsmScheme.c)
+        connector_!!.add(Samek_9BContextObject.f, Samek_9BQHsmScheme.f)
     }
 
     override fun hsm(): IHsm? {
@@ -78,7 +78,7 @@ class Samek_9BMediator(
     }
 
     private fun eventObj2Hsm(objectSignal: Int): Int {
-        return connector_!!.Get(objectSignal)
+        return connector_!!.get(objectSignal)
     }
 
     private fun decodeSignal(signal: Int): String {
