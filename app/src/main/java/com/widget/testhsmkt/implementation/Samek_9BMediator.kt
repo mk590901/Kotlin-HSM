@@ -119,7 +119,7 @@ class Samek_9BMediator(
                 )
             }
         } else {
-            val result = command.executor_.execute(signal, ticket)
+            val result = command.executor.execute(signal, ticket)
         }
     }
 

@@ -9,8 +9,6 @@ class Logger : ILogger {
 
     override fun trace(string: String?) {
         _logger.add(string!!)
-        //Log.d(TAG, string());
-        //Log.d(TAG, string);
     }
 
     override fun string(): String {

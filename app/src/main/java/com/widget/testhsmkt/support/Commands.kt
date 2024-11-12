@@ -5,10 +5,6 @@ import java.util.Hashtable
 class Commands {
     private val container_ = Hashtable<String, Command>()
 
-//    fun number(): Int {
-//        return container_.size()
-//    }
-
     fun add(state: String, signal: Int, executor: Executor): Boolean {
         var result = false
         val key = getKey(state, signal)

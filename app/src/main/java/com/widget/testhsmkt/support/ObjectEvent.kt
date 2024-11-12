@@ -10,11 +10,11 @@ class ObjectEvent
         data_ = data
     }
 
-    fun Event(): Int {
+    fun event(): Int {
         return event_
     }
 
-    fun Data(): Any? {
+    fun data(): Any? {
         return data_
     }
 }

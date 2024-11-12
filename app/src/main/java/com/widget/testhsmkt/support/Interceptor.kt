@@ -36,10 +36,6 @@ class Interceptor {
         return counter_++
     }
 
-//    fun size(): Int {
-//        return container_.size()
-//    }
-
     companion object {
         const val INVALID_TICKET: Int = -1
         const val MAX_VALUE: Int = Int.MAX_VALUE

@@ -1,3 +1,3 @@
 package com.widget.testhsmkt.support
 
-class Command(private val state_: String, private val signal_: Int, val executor_: Executor)
+class Command(private val state: String, private val signal: Int, val executor: Executor)
