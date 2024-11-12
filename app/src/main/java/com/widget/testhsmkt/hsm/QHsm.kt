@@ -18,19 +18,19 @@ abstract class QHsm {
             var ip = 0 // transition entry path index
             var t = state_
             path_[0] = t
-            t = t!!.handler(EMPTY_EVT)
+            t = t?.handler(EMPTY_EVT)
             while (t !== s) {
                 path_[++ip] = t
-                t = t!!.handler(EMPTY_EVT)
+                t = t?.handler(EMPTY_EVT)
             }
             assert(
                 ip < MAX_NEST_DEPTH // entry path must not overflow
             )
             do {       // retrace the entry path in reverse (desired) order...
-                path_[ip]!!.handler(ENTRY_EVT) // enter path_[ip]
+                path_[ip]?.handler(ENTRY_EVT) // enter path_[ip]
             } while (--ip >= 0)
             s = state_
-        } while (s!!.handler(INIT_EVT) == null)
+        } while (s?.handler(INIT_EVT) == null)
     }
 
     protected fun Q_TRAN(target: QState?) {
@@ -46,7 +46,7 @@ abstract class QHsm {
 
         do {                            // process the event hierarchically...
             s = t
-            t = s!!.handler(e) // invoke state handler through pointer s
+            t = s?.handler(e) // invoke state handler through pointer s
         } while (t != null)
 
         if (state_ != null) {                             // transition taken?
@@ -60,11 +60,11 @@ abstract class QHsm {
             // exit current state to the transition source path_[1]...
             s = path_[1]
             while (s !== src) {
-                t = s!!.handler(EXIT_EVT)
+                t = s?.handler(EXIT_EVT)
                 s = // exit action unhandled
                     t // t points to superstate
                         ?: // exit action handled
-                                s.handler(EMPTY_EVT) // find out the superstate
+                                s?.handler(EMPTY_EVT) // find out the superstate
             }
 
             t = path_[0]
@@ -73,7 +73,7 @@ abstract class QHsm {
                 src.handler(EXIT_EVT) // exit the source
                 ip = 0 // enter the target
             } else {
-                t = t!!.handler(EMPTY_EVT) // superstate of target
+                t = t?.handler(EMPTY_EVT) // superstate of target
                 if (src === t) {             // (b) check source==target->super
                     ip = 0 // enter the target
                 } else {
@@ -90,7 +90,7 @@ abstract class QHsm {
                             iq = 0 // indicate that LCA not found
                             ip = 1 // enter target and its superstate
                             path_[1] = t // save the superstate of target
-                            t = t!!.handler(EMPTY_EVT)
+                            t = t?.handler(EMPTY_EVT)
                             while (t != null) {
                                 path_[++ip] = t // store the entry path
                                 if (t === src) {           // is it the source?
@@ -129,11 +129,11 @@ abstract class QHsm {
                                     // for each target->super...
 
                                     do {
-                                        t = s!!.handler(EXIT_EVT) // exit s
+                                        t = s?.handler(EXIT_EVT) // exit s
                                         s = // unhandled?
                                             t // t points to super of s
                                                 ?: // exit action handled
-                                                        s.handler(EMPTY_EVT)
+                                                        s?.handler(EMPTY_EVT)
                                         iq = ip
                                         do {
                                             if (s === path_[iq]) {   // is LCA?
@@ -154,30 +154,30 @@ abstract class QHsm {
             }
             // retrace the entry path in reverse (desired) order...
             while (ip >= 0) {
-                path_[ip]!!.handler(ENTRY_EVT) // enter path_[ip]
+                path_[ip]?.handler(ENTRY_EVT) // enter path_[ip]
                 --ip
             }
             s = path_[0] // stick the target into register
             state_ = s // update the current state
 
             // drill into the target hierarchy...
-            while (s!!.handler(INIT_EVT) == null) {
+            while (s?.handler(INIT_EVT) == null) {
                 t = state_
 
                 path_[0] = t
                 ip = 0
-                t = t!!.handler(EMPTY_EVT)
+                t = t?.handler(EMPTY_EVT)
                 while (t !== s
                 ) {
                     path_[++ip] = t
-                    t = t!!.handler(EMPTY_EVT)
+                    t = t?.handler(EMPTY_EVT)
                 }
                 assert(
                     ip < MAX_NEST_DEPTH // entry path must not overflow
                 )
 
                 do {   // retrace the entry path in reverse (correct) order...
-                    path_[ip]!!.handler(ENTRY_EVT) // enter path_[ip]
+                    path_[ip]?.handler(ENTRY_EVT) // enter path_[ip]
                 } while ((--ip) >= 0)
                 s = state_
             }
