@@ -55,21 +55,21 @@ class Samek_9BMediator(
     }
 
     override fun init() {
-        logger_!!.clear("[INIT]: ")
-        hsm_!!.init()
-        logger_!!.printTrace()
+            logger_?.clear("[INIT]: ")
+        hsm_?.init()
+            logger_?.printTrace()
     }
 
     override fun objDone(signal: Int, objectData: Any?) {
         val hsmEvt = eventObj2Hsm(signal)
         val data = interceptor_.putTicket(objectData)
         val e = QEvent(hsmEvt, data)
-        logger_!!.clear(decodeSignal(hsmEvt) + ": ")
-        hsm_!!.dispatch(e)
-        logger_!!.printTrace()
+            logger_?.clear(decodeSignal(hsmEvt) + ": ")
+        hsm_?.dispatch(e)
+            logger_!!.printTrace()
     }
 
-    fun SetInterceptor(interceptor: Interceptor) {
+    fun setInterceptor(interceptor: Interceptor) {
         interceptor_ = interceptor
     }
 
@@ -84,16 +84,10 @@ class Samek_9BMediator(
     private fun decodeSignal(signal: Int): String {
         var result = "?Signal"
         when (signal) {
-//            Samek_9BQHsmScheme.Q_EMPTY_SIG -> result = "@Q_EMPTY_SIG"
-//            Samek_9BQHsmScheme.Q_INIT_SIG -> result = "@Q_INIT_SIG"
-//            Samek_9BQHsmScheme.Q_ENTRY_SIG -> result = "@Q_ENTRY_SIG"
-//            Samek_9BQHsmScheme.Q_EXIT_SIG -> result = "@Q_EXIT_SIG"
-
             QHsm.Q_EMPTY_SIG -> result = "@Q_EMPTY_SIG"
             QHsm.Q_INIT_SIG -> result = "@Q_INIT_SIG"
             QHsm.Q_ENTRY_SIG -> result = "@Q_ENTRY_SIG"
             QHsm.Q_EXIT_SIG -> result = "@Q_EXIT_SIG"
-
             Samek_9BQHsmScheme.INIT -> result = "@INIT"
             Samek_9BQHsmScheme.FINAL -> result = "@FINAL"
             Samek_9BQHsmScheme.b -> result = "@b"
@@ -109,13 +103,13 @@ class Samek_9BMediator(
     }
 
     override fun execute(state: String?, signal: Int, ticket: Int) {
-        val command = commands_!!.get(state!!, signal)
+        val command = commands_?.get(state!!, signal)
         if (command == null) {
             val data = interceptor_.getTicket(ticket)
             if (data == null) {
-                logger_!!.trace(String.format("%s-%s", state, decodeSignal(signal)))
+                logger_?.trace(String.format("%s-%s", state, decodeSignal(signal)))
             } else {
-                logger_!!.trace(
+                logger_?.trace(
                     String.format(
                         "%s-%s[%s]",
                         state,
@@ -132,17 +126,6 @@ class Samek_9BMediator(
     fun createCommands() {
         try {
             commands_ = Commands()
-
-//            val executor = object : Executor {
-//                override fun execute(signal: Int, ticket: Int): Boolean {
-//                    val value = interceptor_.getTicket(ticket)
-//                    context_.OnInit(value)
-//                    return true
-//                }
-//            }
-
-            //Ok commands_!!.add("init", Samek_9BQHsmScheme.INIT, executor)
-            //Ok commands_?.add("init", Samek_9BQHsmScheme.INIT, executor)
 
             commands_?.add("init", Samek_9BQHsmScheme.INIT, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
@@ -161,7 +144,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s2", QHsm.Q_EXIT_SIG, object : Executor {
+            commands_?.add("s2", QHsm.Q_EXIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS2Exit(value)
@@ -169,9 +152,7 @@ class Samek_9BMediator(
                 }
             })
 
-
-
-            commands_!!.add("s2", QHsm.Q_INIT_SIG, object : Executor {
+            commands_?.add("s2", QHsm.Q_INIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS2Exit(value)
@@ -179,7 +160,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s2", Samek_9BQHsmScheme.c, object : Executor {
+            commands_?.add("s2", Samek_9BQHsmScheme.c, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS2c(value)
@@ -187,7 +168,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s2", Samek_9BQHsmScheme.f, object : Executor {
+            commands_?.add("s2", Samek_9BQHsmScheme.f, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS2f(value)
@@ -195,7 +176,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s21", QHsm.Q_ENTRY_SIG, object : Executor {
+            commands_?.add("s21", QHsm.Q_ENTRY_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS21Entry(value)
@@ -203,7 +184,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s21", QHsm.Q_EXIT_SIG, object : Executor {
+            commands_?.add("s21", QHsm.Q_EXIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS21Exit(value)
@@ -211,7 +192,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s21", QHsm.Q_INIT_SIG, object : Executor {
+            commands_?.add("s21", QHsm.Q_INIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS21Exit(value)
@@ -219,7 +200,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s21", Samek_9BQHsmScheme.b, object : Executor {
+            commands_?.add("s21", Samek_9BQHsmScheme.b, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS21b(value)
@@ -227,7 +208,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s21", Samek_9BQHsmScheme.h, object : Executor {
+            commands_?.add("s21", Samek_9BQHsmScheme.h, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS21h(value)
@@ -235,7 +216,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s211", QHsm.Q_ENTRY_SIG, object : Executor {
+            commands_?.add("s211", QHsm.Q_ENTRY_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS211Entry(value)
@@ -243,7 +224,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s211", QHsm.Q_EXIT_SIG, object : Executor {
+            commands_?.add("s211", QHsm.Q_EXIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS211Exit(value)
@@ -251,7 +232,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s211", Samek_9BQHsmScheme.g, object : Executor {
+            commands_?.add("s211", Samek_9BQHsmScheme.g, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS211g(value)
@@ -259,7 +240,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", QHsm.Q_ENTRY_SIG, object : Executor {
+            commands_?.add("s1", QHsm.Q_ENTRY_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1Entry(value)
@@ -268,7 +249,7 @@ class Samek_9BMediator(
             })
 
 
-            commands_!!.add("s1", QHsm.Q_EXIT_SIG, object : Executor {
+            commands_?.add("s1", QHsm.Q_EXIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1Exit(value)
@@ -276,7 +257,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", QHsm.Q_INIT_SIG, object : Executor {
+            commands_?.add("s1", QHsm.Q_INIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1Exit(value)
@@ -284,7 +265,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", Samek_9BQHsmScheme.b, object : Executor {
+            commands_?.add("s1", Samek_9BQHsmScheme.b, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1b(value)
@@ -292,7 +273,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", Samek_9BQHsmScheme.c, object : Executor {
+            commands_?.add("s1", Samek_9BQHsmScheme.c, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1c(value)
@@ -300,7 +281,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", Samek_9BQHsmScheme.f, object : Executor {
+            commands_?.add("s1", Samek_9BQHsmScheme.f, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1f(value)
@@ -308,7 +289,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", Samek_9BQHsmScheme.a, object : Executor {
+            commands_?.add("s1", Samek_9BQHsmScheme.a, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1a(value)
@@ -316,7 +297,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s1", Samek_9BQHsmScheme.d, object : Executor {
+            commands_?.add("s1", Samek_9BQHsmScheme.d, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS1d(value)
@@ -324,7 +305,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s11", QHsm.Q_ENTRY_SIG, object : Executor {
+            commands_?.add("s11", QHsm.Q_ENTRY_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS11Entry(value)
@@ -332,7 +313,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s11", QHsm.Q_EXIT_SIG, object : Executor {
+            commands_?.add("s11", QHsm.Q_EXIT_SIG, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS11Exit(value)
@@ -340,7 +321,7 @@ class Samek_9BMediator(
                 }
             })
 
-            commands_!!.add("s11", Samek_9BQHsmScheme.g, object : Executor {
+            commands_?.add("s11", Samek_9BQHsmScheme.g, object : Executor {
                 override fun execute(signal: Int, ticket: Int): Boolean {
                     val value = interceptor_.getTicket(ticket)
                     context_.OnS11g(value)
