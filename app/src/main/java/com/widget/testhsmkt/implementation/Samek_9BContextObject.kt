@@ -6,9 +6,9 @@ import com.widget.testhsmkt.interfaces.IMediator
 import com.widget.testhsmkt.interfaces.IObject
 import com.widget.testhsmkt.support.ObjectEvent
 
-class Samek_9BContextObject(logger: ILogger) : IObject {
+class Samek_9BContextObject(logger: ILogger?) : IObject {
     var mediator_: IMediator? = null
-    var logger_: ILogger = logger
+    var logger_: ILogger? = logger
     override fun done(signal: ObjectEvent) {
         mediator_?.objDone(signal.Event(), signal.Data())
     }
@@ -42,133 +42,133 @@ class Samek_9BContextObject(logger: ILogger) : IObject {
 
     fun OnInit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "top-QHsmScheme.INIT_SIG" else "top-QHsmScheme.INIT_SIG[$data]")
+        logger_?.trace(if (data == null) "top-QHsmScheme.INIT_SIG" else "top-QHsmScheme.INIT_SIG[$data]")
         return result
     }
 
     fun OnS2Entry(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s2-QHsm.Q_ENTRY_SIG" else "s2-QHsm.Q_ENTRY_SIG[$data]")
+        logger_?.trace(if (data == null) "s2-QHsm.Q_ENTRY_SIG" else "s2-QHsm.Q_ENTRY_SIG[$data]")
         return result
     }
 
     fun OnS2Exit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s2-QHsm.Q_INIT_SIG" else "s2-QHsm.Q_INIT_SIG[$data]")
+        logger_?.trace(if (data == null) "s2-QHsm.Q_INIT_SIG" else "s2-QHsm.Q_INIT_SIG[$data]")
         return result
     }
 
     fun OnS2c(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s2-QHsmScheme.c" else "s2-QHsmScheme.c[$data]")
+        logger_?.trace(if (data == null) "s2-QHsmScheme.c" else "s2-QHsmScheme.c[$data]")
         return result
     }
 
     fun OnS2f(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s2-QHsmScheme.f" else "s2-QHsmScheme.f[$data]")
+        logger_?.trace(if (data == null) "s2-QHsmScheme.f" else "s2-QHsmScheme.f[$data]")
         return result
     }
 
     fun OnS21Entry(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s21-QHsm.Q_ENTRY_SIG" else "s21-QHsm.Q_ENTRY_SIG[$data]")
+        logger_?.trace(if (data == null) "s21-QHsm.Q_ENTRY_SIG" else "s21-QHsm.Q_ENTRY_SIG[$data]")
         return result
     }
 
     fun OnS21Exit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s21-QHsm.Q_INIT_SIG" else "s21-QHsm.Q_INIT_SIG[$data]")
+        logger_?.trace(if (data == null) "s21-QHsm.Q_INIT_SIG" else "s21-QHsm.Q_INIT_SIG[$data]")
         return result
     }
 
     fun OnS21b(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s21-QHsmScheme.b" else "s21-QHsmScheme.b[$data]")
+        logger_?.trace(if (data == null) "s21-QHsmScheme.b" else "s21-QHsmScheme.b[$data]")
         return result
     }
 
     fun OnS21h(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s21-QHsmScheme.h" else "s21-QHsmScheme.h[$data]")
+        logger_?.trace(if (data == null) "s21-QHsmScheme.h" else "s21-QHsmScheme.h[$data]")
         return result
     }
 
     fun OnS211Entry(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s211-QHsm.Q_ENTRY_SIG" else "s211-QHsm.Q_ENTRY_SIG[$data]")
+        logger_?.trace(if (data == null) "s211-QHsm.Q_ENTRY_SIG" else "s211-QHsm.Q_ENTRY_SIG[$data]")
         return result
     }
 
     fun OnS211Exit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s211-QHsm.Q_EXIT_SIG" else "s211-QHsm.Q_EXIT_SIG[$data]")
+        logger_?.trace(if (data == null) "s211-QHsm.Q_EXIT_SIG" else "s211-QHsm.Q_EXIT_SIG[$data]")
         return result
     }
 
     fun OnS211g(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s211-QHsmScheme.g" else "s211-QHsmScheme.g[$data]")
+        logger_?.trace(if (data == null) "s211-QHsmScheme.g" else "s211-QHsmScheme.g[$data]")
         return result
     }
 
     fun OnS1Entry(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsm.Q_ENTRY_SIG" else "s1-QHsm.Q_ENTRY_SIG[$data]")
+        logger_?.trace(if (data == null) "s1-QHsm.Q_ENTRY_SIG" else "s1-QHsm.Q_ENTRY_SIG[$data]")
         return result
     }
 
     fun OnS1Exit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsm.Q_INIT_SIG" else "s1-QHsm.Q_INIT_SIG[$data]")
+        logger_?.trace(if (data == null) "s1-QHsm.Q_INIT_SIG" else "s1-QHsm.Q_INIT_SIG[$data]")
         return result
     }
 
     fun OnS1b(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsmScheme.b" else "s1-QHsmScheme.b[$data]")
+        logger_?.trace(if (data == null) "s1-QHsmScheme.b" else "s1-QHsmScheme.b[$data]")
         return result
     }
 
     fun OnS1c(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsmScheme.c" else "s1-QHsmScheme.c[$data]")
+        logger_?.trace(if (data == null) "s1-QHsmScheme.c" else "s1-QHsmScheme.c[$data]")
         return result
     }
 
     fun OnS1f(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsmScheme.f" else "s1-QHsmScheme.f[$data]")
+        logger_?.trace(if (data == null) "s1-QHsmScheme.f" else "s1-QHsmScheme.f[$data]")
         return result
     }
 
     fun OnS1a(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsmScheme.a" else "s1-QHsmScheme.a[$data]")
+        logger_?.trace(if (data == null) "s1-QHsmScheme.a" else "s1-QHsmScheme.a[$data]")
         return result
     }
 
     fun OnS1d(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s1-QHsmScheme.d" else "s1-QHsmScheme.d[$data]")
+        logger_?.trace(if (data == null) "s1-QHsmScheme.d" else "s1-QHsmScheme.d[$data]")
         return result
     }
 
     fun OnS11Entry(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s11-QHsm.Q_ENTRY_SIG" else "s11-QHsm.Q_ENTRY_SIG[$data]")
+        logger_?.trace(if (data == null) "s11-QHsm.Q_ENTRY_SIG" else "s11-QHsm.Q_ENTRY_SIG[$data]")
         return result
     }
 
     fun OnS11Exit(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s11-QHsm.Q_EXIT_SIG" else "s11-QHsm.Q_EXIT_SIG[$data]")
+        logger_?.trace(if (data == null) "s11-QHsm.Q_EXIT_SIG" else "s11-QHsm.Q_EXIT_SIG[$data]")
         return result
     }
 
     fun OnS11g(data: Any?): Boolean {
         val result = false
-        logger_.trace(if (data == null) "s11-QHsmScheme.g" else "s11-QHsmScheme.g[$data]")
+        logger_?.trace(if (data == null) "s11-QHsmScheme.g" else "s11-QHsmScheme.g[$data]")
         return result
     }
 
