@@ -6,42 +6,42 @@ import com.widget.testhsmkt.hsm.QHsm
 import com.widget.testhsmkt.interfaces.ILogger
 import com.widget.testhsmkt.interfaces.IMediator
 
-class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
-    var logger_: ILogger = logger
-    private val mediator_: IMediator = mediator
+class Samek_9BQHsmScheme(mediator: IMediator?, logger: ILogger?) : QHsm() {
+    var logger_: ILogger? = logger
+    private val mediator_: IMediator? = mediator
 
     protected var s0State: QState = object : QState {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s0", event.sig_, event.ticket_)
+                    mediator_?.execute("s0", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s0", event.sig_, event.ticket_)
+                    mediator_?.execute("s0", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_INIT_SIG -> {
-                    mediator_.execute("s0", event.sig_, event.ticket_)
+                    mediator_?.execute("s0", event.sig_, event.ticket_)
                     Q_TRAN(s1State)
                     return null
                 }
 
                 e -> {
-                    mediator_.execute("s0", event.sig_, event.ticket_)
+                    mediator_?.execute("s0", event.sig_, event.ticket_)
                     Q_TRAN(s211State)
                     return null
                 }
             }
-            return QHsm.top
+            return top
         }
     }
 
     override fun init(event: QEvent?) {
         if (event != null) {
-            mediator_.execute("init", event.sig_, 0)
+            mediator_?.execute("init", event.sig_, 0)
         }
         super.init_tran(s0State)
     }
@@ -50,31 +50,31 @@ class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s2", event.sig_, event.ticket_)
+                    mediator_?.execute("s2", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s2", event.sig_, event.ticket_)
+                    mediator_?.execute("s2", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_INIT_SIG -> {
-                    mediator_.execute("s2", event.sig_, event.ticket_)
+                    mediator_?.execute("s2", event.sig_, event.ticket_)
                     Q_TRAN(s21State)
                     return null
                 }
 
                 c -> {
                     if (event != null) {
-                        mediator_.execute("s2", event.sig_, event.ticket_)
+                        mediator_?.execute("s2", event.sig_, event.ticket_)
                     }
                     Q_TRAN(s1State)
                     return null
                 }
 
                 f -> {
-                    mediator_.execute("s2", event.sig_, event.ticket_)
+                    mediator_?.execute("s2", event.sig_, event.ticket_)
                     Q_TRAN(s11State)
                     return null
                 }
@@ -87,29 +87,29 @@ class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s21", event.sig_, event.ticket_)
+                    mediator_?.execute("s21", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s21", event.sig_, event.ticket_)
+                    mediator_?.execute("s21", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_INIT_SIG -> {
-                    mediator_.execute("s21", event.sig_, event.ticket_)
+                    mediator_?.execute("s21", event.sig_, event.ticket_)
                     Q_TRAN(s211State)
                     return null
                 }
 
                 b -> {
-                    mediator_.execute("s21", event.sig_, event.ticket_)
+                    mediator_?.execute("s21", event.sig_, event.ticket_)
                     Q_TRAN(s211State)
                     return null
                 }
 
                 h -> {
-                    mediator_.execute("s21", event.sig_, event.ticket_)
+                    mediator_?.execute("s21", event.sig_, event.ticket_)
                     Q_TRAN(this)
                     return null
                 }
@@ -122,17 +122,17 @@ class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s211", event.sig_, event.ticket_)
+                    mediator_?.execute("s211", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s211", event.sig_, event.ticket_)
+                    mediator_?.execute("s211", event.sig_, event.ticket_)
                     return null
                 }
 
                 g -> {
-                    mediator_.execute("s211", event.sig_, event.ticket_)
+                    mediator_?.execute("s211", event.sig_, event.ticket_)
                     Q_TRAN(s0State)
                     return null
                 }
@@ -145,47 +145,47 @@ class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_INIT_SIG -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(s11State)
                     return null
                 }
 
                 b -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(s11State)
                     return null
                 }
 
                 c -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(s2State)
                     return null
                 }
 
                 f -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(s211State)
                     return null
                 }
 
                 a -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(this)
                     return null
                 }
 
                 d -> {
-                    mediator_.execute("s1", event.sig_, event.ticket_)
+                    mediator_?.execute("s1", event.sig_, event.ticket_)
                     Q_TRAN(s0State)
                     return null
                 }
@@ -198,17 +198,17 @@ class Samek_9BQHsmScheme(mediator: IMediator, logger: ILogger) : QHsm() {
         override fun handler(event: QEvent?): QState? {
             when (event?.sig_) {
                 Q_ENTRY_SIG -> {
-                    mediator_.execute("s11", event.sig_, event.ticket_)
+                    mediator_?.execute("s11", event.sig_, event.ticket_)
                     return null
                 }
 
                 Q_EXIT_SIG -> {
-                    mediator_.execute("s11", event.sig_, event.ticket_)
+                    mediator_?.execute("s11", event.sig_, event.ticket_)
                     return null
                 }
 
                 g -> {
-                    mediator_.execute("s11", event.sig_, event.ticket_)
+                    mediator_?.execute("s11", event.sig_, event.ticket_)
                     Q_TRAN(s211State)
                     return null
                 }
