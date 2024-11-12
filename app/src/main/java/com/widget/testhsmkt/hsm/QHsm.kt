@@ -1,7 +1,5 @@
 package com.widget.testhsmkt.hsm
 
-import com.widget.testhsmkt.interfaces.IMediator
-
 abstract class QHsm {
     private var state_: QState? = null
     private val path_ = arrayOfNulls<QState>(MAX_NEST_DEPTH)
@@ -17,7 +15,7 @@ abstract class QHsm {
 
         var s: QState? = top // an HSM starts in the top state
         do {                                       // drill into the target...
-            var ip: Int = 0 // transition entry path index
+            var ip = 0 // transition entry path index
             var t = state_
             path_[0] = t
             t = t!!.handler(EMPTY_EVT)
@@ -29,7 +27,7 @@ abstract class QHsm {
                 ip < MAX_NEST_DEPTH // entry path must not overflow
             )
             do {       // retrace the entry path in reverse (desired) order...
-                path_[ip.toInt()]!!.handler(ENTRY_EVT) // enter path_[ip]
+                path_[ip]!!.handler(ENTRY_EVT) // enter path_[ip]
             } while (--ip >= 0)
             s = state_
         } while (s!!.handler(INIT_EVT) == null)
@@ -179,7 +177,7 @@ abstract class QHsm {
                 )
 
                 do {   // retrace the entry path in reverse (correct) order...
-                    path_[ip.toInt()]!!.handler(ENTRY_EVT) // enter path_[ip]
+                    path_[ip]!!.handler(ENTRY_EVT) // enter path_[ip]
                 } while ((--ip) >= 0)
                 s = state_
             }
@@ -207,10 +205,6 @@ abstract class QHsm {
                 return null
             }
         }
-    }
-
-    fun top(): QState {
-        return top
     }
 
 }
