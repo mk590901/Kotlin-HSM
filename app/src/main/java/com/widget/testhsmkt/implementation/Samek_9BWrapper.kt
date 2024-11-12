@@ -4,7 +4,7 @@ import com.widget.testhsmkt.hsm.QEvent
 import com.widget.testhsmkt.interfaces.IHsm
 import com.widget.testhsmkt.interfaces.IMediator
 
-class Samek_9BWrapper(private val entity_: Samek_9BQHsmScheme, mediator: IMediator) : IHsm {
+class Samek_9BWrapper(private val entity_: Samek_9BQHsmScheme?, mediator: IMediator?) : IHsm {
     private var mediator_: IMediator?
 
     init {
@@ -21,11 +21,11 @@ class Samek_9BWrapper(private val entity_: Samek_9BQHsmScheme, mediator: IMediat
     }
 
     override fun init() {
-        entity_.init(QEvent(Samek_9BQHsmScheme.INIT))
+        entity_?.init(QEvent(Samek_9BQHsmScheme.INIT))
     }
 
     override fun dispatch(event: QEvent?) {
-        entity_.dispatch(event)
+        entity_?.dispatch(event)
     }
 }
 
