@@ -65,7 +65,7 @@ class Samek_9BMediator(
         val e = QEvent(hsmEvt, data)
             logger_?.clear(decodeSignal(hsmEvt) + ": ")
         hsm_?.dispatch(e)
-            logger_!!.printTrace()
+            logger_?.printTrace()
     }
 
     fun setInterceptor(interceptor: Interceptor) {
