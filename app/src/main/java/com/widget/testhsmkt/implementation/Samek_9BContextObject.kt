@@ -9,6 +9,7 @@ import com.widget.testhsmkt.support.ObjectEvent
 class Samek_9BContextObject(logger: ILogger?) : IObject {
     var mediator_: IMediator? = null
     var logger_: ILogger? = logger
+
     override fun done(signal: ObjectEvent) {
         mediator_?.objDone(signal.event(), signal.data())
     }
