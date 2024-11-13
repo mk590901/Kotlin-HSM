@@ -54,18 +54,18 @@ class Samek_9BMediator(
     }
 
     override fun init() {
-            logger_?.clear("[INIT]: ")
+        logger_?.clear("[INIT]: ")
         hsm_?.init()
-            logger_?.printTrace()
+        logger_?.printTrace()
     }
 
     override fun objDone(signal: Int, objectData: Any?) {
         val hsmEvt = eventObj2Hsm(signal)
         val data = interceptor_.putTicket(objectData)
         val e = QEvent(hsmEvt, data)
-            logger_?.clear(decodeSignal(hsmEvt) + ": ")
+        logger_?.clear(decodeSignal(hsmEvt) + ": ")
         hsm_?.dispatch(e)
-            logger_?.printTrace()
+        logger_?.printTrace()
     }
 
     fun setInterceptor(interceptor: Interceptor) {
@@ -108,14 +108,7 @@ class Samek_9BMediator(
             if (data == null) {
                 logger_?.trace(String.format("%s-%s", state, decodeSignal(signal)))
             } else {
-                logger_?.trace(
-                    String.format(
-                        "%s-%s[%s]",
-                        state,
-                        decodeSignal(signal),
-                        data.toString()
-                    )
-                )
+                logger_?.trace(String.format("%s-%s[%s]", state, decodeSignal(signal), data.toString()))
             }
         } else {
             val result = command.executor.execute(signal, ticket)
@@ -327,8 +320,7 @@ class Samek_9BMediator(
                     return true
                 }
             })
-        }
-        catch (exception: Exception) {
+        } catch (exception: Exception) {
         }
     }
 }
